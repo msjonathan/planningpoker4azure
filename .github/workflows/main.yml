@@ -39,6 +39,7 @@ jobs:
             resource-group: PG-jonathan
             dns-name-label: url-for-container
             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: nikoplanning-container
