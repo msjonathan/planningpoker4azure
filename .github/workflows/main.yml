@@ -1,7 +1,5 @@
 on: 
- pull_request:
-  branches:
-  - master
+ push:
 name: Build_And_Deploy_Container
 
 jobs:
