@@ -5,6 +5,9 @@ name: Build_And_Deploy_Container
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
+        defaults:
+         run:
+          working-directory: ./docker
         steps:
         # checkout the repo
         - name: 'Checkout GitHub Action'
@@ -14,6 +17,11 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
+            
+        - name: 'create app directory'
+          working-directory: ./docker
+        - run: |
+           mkdir ./app 
         
         - name: 'Build and push image'
           uses: azure/docker-login@v1
@@ -22,6 +30,10 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build -f docker/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
+            docker build -f . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
+        
+
+          
+
 
