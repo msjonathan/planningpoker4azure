@@ -32,6 +32,17 @@ jobs:
         - run: |
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
+          
+        - name: 'Deploy to Azure Container Instances'
+          uses: 'azure/aci-deploy@v1'
+          with:
+            resource-group: PG-jonathan
+            dns-name-label: url-for-container
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: nikoplanning-container
+            location: 'west eu'
         
 
           
