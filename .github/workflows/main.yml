@@ -20,7 +20,7 @@ jobs:
             
         - name: 'create app directory'
           working-directory: ./docker
-        - run: |
+          run: |
            mkdir ./app 
         
         - name: 'Build and push image'
