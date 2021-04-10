@@ -22,6 +22,6 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build -f docker/DockerFile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
+            docker build -f docker/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nikoplanningpoker:${{ github.sha }}
 
